@@ -1,15 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
+import Collection from './Collection';
 
 const Dashboard = () => {
   const [value, setValue] = useState('');
+  const [collectionData, setCollectionData] = useState([]);
+
+  const getThreads = async () => {
+    // eslint-disable-next-line
+    const res = await axios.get('/api/threads');
+
+    setCollectionData(res.data);
+  };
+
+  useEffect(() => {
+    getThreads();
+  }, []);
 
   const handleSubmit = async e => {
     e.preventDefault();
     setValue('');
-    console.log('submit');
 
-    await axios.post('/api/add-thread', { value });
+    await axios.post('/api/add-thread', { code: value });
+
+    getThreads();
   };
 
   return (
@@ -19,6 +34,8 @@ const Dashboard = () => {
       <form onSubmit={handleSubmit}>
         <input type='text' value={value} onChange={e => setValue(e.target.value)} />
       </form>
+
+      <Collection collectionData={collectionData} getThreads={getThreads} />
     </div>
   );
 };

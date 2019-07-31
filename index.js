@@ -5,9 +5,12 @@ const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const keys = require('./config/keys');
 require('./models/User');
+require('./models/Thread');
 require('./services/passport');
 
-mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true }).catch(err => {
+  console.log(err);
+});
 
 const app = express();
 
