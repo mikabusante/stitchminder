@@ -24,5 +24,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/authRoutes')(app);
+require('./routes/threadRoutes')(app);
 
 app.listen(process.env.PORT || 5000);
