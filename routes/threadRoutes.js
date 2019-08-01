@@ -17,7 +17,9 @@ module.exports = app => {
 
     try {
       await thread.save();
-      res.send(thread);
+
+      const allThreads = await Thread.find({ _user: req.user.id });
+      res.send(allThreads);
     } catch (err) {
       console.log(err);
       res.send(err);

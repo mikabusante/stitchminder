@@ -22,9 +22,8 @@ const Dashboard = () => {
     e.preventDefault();
     setValue('');
 
-    await axios.post('/api/add-thread', { code: value });
-
-    getThreads();
+    const res = await axios.post('/api/add-thread', { code: value });
+    setCollectionData(res.data);
   };
 
   return (

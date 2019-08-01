@@ -5,11 +5,12 @@ import uuid from 'uuid';
 const Collection = ({ getThreads, collectionData }) => {
   const handleDelete = async thread => {
     const res = await axios.post('/api/delete-thread', thread);
-  };
+    console.log('res:', res);
 
-  useEffect(() => {
-    getThreads();
-  }, [getThreads, collectionData]);
+    if (res.status === 200) {
+      getThreads();
+    }
+  };
 
   return (
     <div>
