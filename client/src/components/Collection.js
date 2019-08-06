@@ -1,20 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import uuid from 'uuid';
 
-const Collection = ({ getThreads, collectionData }) => {
+const Collection = ({ setCollectionData, collectionData }) => {
   const handleDelete = async thread => {
     const res = await axios.post('/api/delete-thread', thread);
     console.log('res:', res);
 
     if (res.status === 200) {
-      getThreads();
+      setCollectionData(res.data);
     }
   };
 
   return (
     <div>
-      <p>Collection</p>
       <div>
         {collectionData.map(item => (
           <div key={uuid()}>

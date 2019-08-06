@@ -31,7 +31,9 @@ module.exports = app => {
 
     try {
       const thread = await Thread.deleteOne({ code, _user });
-      res.send(thread);
+
+      const allThreads = await Thread.find({ _user: req.user.id });
+      res.send(allThreads);
     } catch (err) {
       if (err) console.log(err);
       res.send(err);
