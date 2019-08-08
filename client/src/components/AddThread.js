@@ -1,42 +1,63 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import colors from '../dmc-scraper/colors.json';
 
 const AddThread = ({ setCollectionData }) => {
   const [value, setValue] = useState('');
+  const [notFound, setNotFound] = useState(false);
 
   const handleSubmit = async e => {
     e.preventDefault();
-    setValue('');
 
-    const res = await axios.post('/api/add-thread', { code: value });
-    setCollectionData(res.data);
+    const thread = colors.filter(color => color.code === value);
+
+    if (thread.length === 0) {
+      setNotFound(true);
+    } else {
+      setNotFound(false);
+      const res = await axios.post('/api/add-thread', { code: value });
+      setCollectionData(res.data);
+      setValue('');
+    }
   };
 
   return (
-    <div>
+    <Wrapper>
       <Title>Your Collection</Title>
       <form onSubmit={handleSubmit}>
         <Label>Add Thread</Label>
         <InputWrapper>
-          <Input type='text' value={value} onChange={e => setValue(e.target.value)} />
+          <Input
+            notFound={notFound}
+            type='text'
+            value={value}
+            onChange={e => setValue(e.target.value)}
+          />
           <Button>Add</Button>
+          <Warning notFound={notFound}>
+            Sorry, code not found. Please enter a valid DMC number.
+          </Warning>
         </InputWrapper>
       </form>
 
       <Divider />
-    </div>
+    </Wrapper>
   );
 };
 
 export default AddThread;
+
+const Wrapper = styled.div`
+  width: 100%;
+`;
 
 const Divider = styled.hr`
   border: none;
   color: #212121;
   background-color: #212121;
   height: 1px;
-  width: 60vw;
+  width: 100%;
 `;
 
 const Title = styled.h2`
@@ -57,12 +78,17 @@ const InputWrapper = styled.div`
 const Input = styled.input`
   box-sizing: border-box;
   height: 3rem;
-  border: 1px solid #212121;
+  border: ${props => (props.notFound ? '1px solid red' : '1px solid #212121')};
+
   margin-right: 0.5rem;
   font-size: 2rem;
   width: 6ch;
   padding: 0 0.25rem;
   font-family: monospace;
+
+  :focus {
+    outline: 0;
+  }
 `;
 
 const Button = styled.button`
@@ -79,4 +105,20 @@ const Button = styled.button`
   :hover {
     opacity: 0.85;
   }
+
+  :focus {
+    outline: 0;
+  }
+`;
+
+const Warning = styled.div`
+  border: 1px solid #212121;
+  padding: 0.5rem;
+  width: 30%;
+  font-style: italic;
+  display: ${props => (props.notFound ? 'initial' : 'none')};
+  margin-left: 2rem;
+  font-size: 0.8rem;
+  min-width: 15ch;
+  max-width: max-content;
 `;

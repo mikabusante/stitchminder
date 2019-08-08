@@ -37,6 +37,11 @@ cheerio@^1.0.0-rc.3:
     lodash "^4.15.0"
     parse5 "^3.0.1"
 
+color-name-list@^4.10.0:
+  version "4.10.0"
+  resolved "https://registry.yarnpkg.com/color-name-list/-/color-name-list-4.10.0.tgz#e86f64bbbfd82af5bf6afb12a72f0dcfb4ebe4b2"
+  integrity sha512-6U3ej4nWpUryklMvqX+TJuHvoA+4u8NROxH6vM1DHkxFKbSb4BFURrkLucnH1BHoehAy2dbRJF3FDju1ohcv0g==
+
 css-select@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/css-select/-/css-select-1.2.0.tgz#2b3a110539c5355f1cd8d314623e870b121ec858"
@@ -138,6 +143,11 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
   integrity sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
+
+nearest-color@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/nearest-color/-/nearest-color-0.4.4.tgz#fb812072b511f4f09a0a316903332e09fa5d7f1d"
+  integrity sha512-orhcaIORC10tf41Ld2wwlcC+FaAavHG87JHWB3eHH5p7v2k9Tzym2XNEZzLAm5YJwGv6Q38WWc7SOb+Qfu/4NQ==
 
 nth-check@~1.0.1:
   version "1.0.2"
