@@ -8,10 +8,12 @@ module.exports = app => {
   });
 
   app.post('/api/add-thread', async (req, res) => {
-    const { code } = req.body;
+    const { code, name, hex } = req.body;
 
     const thread = new Thread({
       code: code,
+      name: name,
+      hex: hex,
       _user: req.user.id
     });
 
@@ -19,6 +21,7 @@ module.exports = app => {
       await thread.save();
 
       const allThreads = await Thread.find({ _user: req.user.id });
+      console.log('allThreads:', allThreads);
       res.send(allThreads);
     } catch (err) {
       console.log(err);

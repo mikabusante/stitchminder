@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import uuid from 'uuid';
+import styled from 'styled-components';
+
+import Item from './Item';
 
 const Collection = ({ setCollectionData, collectionData }) => {
   const handleDelete = async thread => {
@@ -13,17 +16,17 @@ const Collection = ({ setCollectionData, collectionData }) => {
   };
 
   return (
-    <div>
-      <div>
-        {collectionData.map(item => (
-          <div key={uuid()}>
-            <p>{item.code}</p>
-            <button onClick={() => handleDelete(item)}>Delete</button>
-          </div>
-        ))}
-      </div>
-    </div>
+    <Wrapper>
+      {collectionData.reverse().map(item => (
+        <Item item={item} handleDelete={handleDelete} key={uuid()} />
+      ))}
+    </Wrapper>
   );
 };
 
 export default Collection;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;

@@ -40,7 +40,7 @@ export default Dashboard;
 const Wrapper = styled.div`
   font-family: 'Karla';
   display: flex;
-  margin: 8vh 10vw 8vh 3vw;
+  margin: 8vh 6vw 8vh 3vw;
 `;
 
 const Sidebar = styled.div`

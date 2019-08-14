@@ -3,6 +3,8 @@ const { Schema } = mongoose;
 
 const threadSchema = new Schema({
   code: String,
+  name: String,
+  hex: String,
   _user: {
     type: Schema.Types.ObjectId,
     ref: 'User'

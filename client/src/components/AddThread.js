@@ -10,13 +10,19 @@ const AddThread = ({ setCollectionData }) => {
   const handleSubmit = async e => {
     e.preventDefault();
 
+    if (value === '') return;
+
     const thread = colors.filter(color => color.code === value);
 
     if (thread.length === 0) {
       setNotFound(true);
     } else {
       setNotFound(false);
-      const res = await axios.post('/api/add-thread', { code: value });
+
+      let name = thread[0].name;
+      let hex = thread[0].hex;
+      const res = await axios.post('/api/add-thread', { code: value, name, hex });
+
       setCollectionData(res.data);
       setValue('');
     }
