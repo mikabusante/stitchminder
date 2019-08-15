@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import uuid from 'uuid';
 import styled from 'styled-components';
@@ -16,17 +16,20 @@ const Collection = ({ setCollectionData, collectionData }) => {
   };
 
   return (
-    <Wrapper>
-      {collectionData.reverse().map(item => (
-        <Item item={item} handleDelete={handleDelete} key={uuid()} />
-      ))}
-    </Wrapper>
+    <div>
+      {/* <button onClick={() => setSorted(true)}>Sort by Code</button> */}
+      <Threads>
+        {collectionData.reverse().map(item => (
+          <Item item={item} handleDelete={handleDelete} key={uuid()} />
+        ))}
+      </Threads>
+    </div>
   );
 };
 
 export default Collection;
 
-const Wrapper = styled.div`
+const Threads = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;

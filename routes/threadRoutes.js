@@ -8,12 +8,13 @@ module.exports = app => {
   });
 
   app.post('/api/add-thread', async (req, res) => {
-    const { code, name, hex } = req.body;
+    const { code, name, hex, hsl } = req.body;
 
     const thread = new Thread({
       code: code,
       name: name,
       hex: hex,
+      hsl: hsl,
       _user: req.user.id
     });
 

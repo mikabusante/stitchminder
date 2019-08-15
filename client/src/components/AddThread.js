@@ -3,14 +3,25 @@ import styled from 'styled-components';
 import axios from 'axios';
 import colors from '../dmc-scraper/colors.json';
 
-const AddThread = ({ setCollectionData }) => {
+const AddThread = ({ collectionData, setCollectionData }) => {
   const [value, setValue] = useState('');
   const [notFound, setNotFound] = useState(false);
+  const [existing, setExisting] = useState(false);
 
   const handleSubmit = async e => {
     e.preventDefault();
 
     if (value === '') return;
+
+    const existingThread = collectionData.find(thread => thread.code === value);
+
+    if (existingThread) {
+      setNotFound(false);
+      setExisting(true);
+      return;
+    } else {
+      setExisting(false);
+    }
 
     const thread = colors.filter(color => color.code === value);
 
@@ -21,7 +32,8 @@ const AddThread = ({ setCollectionData }) => {
 
       let name = thread[0].name;
       let hex = thread[0].hex;
-      const res = await axios.post('/api/add-thread', { code: value, name, hex });
+      let hsl = thread[0].hsl;
+      const res = await axios.post('/api/add-thread', { code: value, name, hex, hsl });
 
       setCollectionData(res.data);
       setValue('');
@@ -36,6 +48,7 @@ const AddThread = ({ setCollectionData }) => {
         <InputWrapper>
           <Input
             notFound={notFound}
+            existing={existing}
             type='text'
             value={value}
             onChange={e => setValue(e.target.value)}
@@ -43,6 +56,10 @@ const AddThread = ({ setCollectionData }) => {
           <Button>Add</Button>
           <Warning notFound={notFound}>
             Sorry, code not found. Please enter a valid DMC number.
+          </Warning>
+
+          <Warning existing={existing}>
+            This thread has already been added to your collection.
           </Warning>
         </InputWrapper>
       </form>
@@ -73,6 +90,7 @@ const Title = styled.h2`
 
 const Label = styled.label`
   font-size: 1.3rem;
+  line-height: 2rem;
 `;
 
 const InputWrapper = styled.div`
@@ -84,8 +102,7 @@ const InputWrapper = styled.div`
 const Input = styled.input`
   box-sizing: border-box;
   height: 3rem;
-  border: ${props => (props.notFound ? '1px solid red' : '1px solid #212121')};
-
+  border: ${props => (props.existing || props.notFound ? '1px solid red' : '1px solid #212121')};
   margin-right: 0.5rem;
   font-size: 2rem;
   width: 6ch;
@@ -122,7 +139,7 @@ const Warning = styled.div`
   padding: 0.5rem;
   width: 30%;
   font-style: italic;
-  display: ${props => (props.notFound ? 'initial' : 'none')};
+  display: ${props => (props.notFound || props.existing ? 'initial' : 'none')};
   margin-left: 2rem;
   font-size: 0.8rem;
   min-width: 15ch;

@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import Options from './Options';
 import { FiTrash } from 'react-icons/fi';
 
-const Item = ({ item, handleDelete }) => {
+const Item = ({ interact, item, handleDelete }) => {
   return (
     <Wrapper>
       <Color hex={item.hex} />
       <Text>
         <Code>{item.code}</Code>
         <Name>{item.name}</Name>
-        <Icon onClick={() => handleDelete(item)}>
+        <Icon interact={interact} onClick={() => handleDelete(item)}>
           <FiTrash />
         </Icon>
       </Text>
@@ -27,8 +27,8 @@ const Wrapper = styled.div`
   margin: 2rem 1.25rem 1.25rem 0;
   display: flex;
   flex-direction: column;
-  width: 185px;
-  height: 190px;
+  width: 155px;
+  height: 196px;
 `;
 
 const Color = styled.div`
@@ -65,6 +65,7 @@ const Icon = styled.div`
   font-size: 15px;
   color: #c4c4c4;
   transition: color 0.25s;
+  display: ${props => (props.interact ? `initial` : `none`)}
 
   :hover {
     color: #212121;

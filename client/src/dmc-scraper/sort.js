@@ -1,9 +1,8 @@
 const colors = require('./old_colors.json');
 const Color = require('color');
 const colorString = require('color-string');
+const convert = require('color-convert');
 const fs = require('fs');
-
-const res = colorString.get(`#${colors[1].hex}`);
 
 const sortArray = () => {
   let colorArray = [];
@@ -11,13 +10,13 @@ const sortArray = () => {
   colors.map(color => {
     const { code, name, hex } = color;
 
-    const hsl = colorString.get(`#${color.hex}`);
+    const hsl = convert.hex.hsl(hex);
 
     colorArray.push({
       code: code,
       name: name,
       hex: hex,
-      hsl: hsl.value
+      hsl: hsl
     });
   });
 

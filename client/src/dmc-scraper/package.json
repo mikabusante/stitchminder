@@ -8,6 +8,7 @@
     "cheerio": "^1.0.0-rc.3",
     "cheerio-tableparser": "^1.0.1",
     "color": "^3.1.2",
+    "color-convert": "^2.0.0",
     "color-name-list": "^4.10.0",
     "color-string": "^1.5.3",
     "nearest-color": "^0.4.4"

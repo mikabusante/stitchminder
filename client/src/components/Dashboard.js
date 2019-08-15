@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Collection from './Collection';
 import AddThread from './AddThread';
+import Sidebar from './Sidebar';
 
 const Dashboard = () => {
   const [collectionData, setCollectionData] = useState([]);
@@ -20,15 +21,9 @@ const Dashboard = () => {
 
   return (
     <Wrapper>
-      <Sidebar>
-        <Title>THREADS</Title>
-        <Link href='/'>Collection</Link>
-        <Link href='/'>Reference</Link>
-        <Link href='/api/logout'>Logout</Link>
-      </Sidebar>
-
+      <Sidebar />
       <Content>
-        <AddThread setCollectionData={setCollectionData} />
+        <AddThread collectionData={collectionData} setCollectionData={setCollectionData} />
         <Collection collectionData={collectionData} setCollectionData={setCollectionData} />
       </Content>
     </Wrapper>
@@ -40,31 +35,7 @@ export default Dashboard;
 const Wrapper = styled.div`
   font-family: 'Karla';
   display: flex;
-  margin: 8vh 6vw 8vh 3vw;
-`;
-
-const Sidebar = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0 2rem;
-`;
-
-const Link = styled.a`
-  padding: 0.25rem 0;
-  text-decoration: none;
-
-  :visited {
-    color: black;
-  }
-
-  :hover {
-    font-weight: 600;
-  }
-`;
-const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: 600;
-  margin: 0 3rem 1rem 0;
+  margin: 8vh 6vw 5vh 3vw;
 `;
 
 const Content = styled.div`
