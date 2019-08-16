@@ -25,10 +25,11 @@ export default Item;
 const Wrapper = styled.div`
   border: 2px solid #212121;
   margin: 2rem 1.25rem 1.25rem 0;
+
   display: flex;
   flex-direction: column;
   width: 155px;
-  height: 196px;
+  height: 210px;
 `;
 
 const Color = styled.div`
@@ -65,7 +66,7 @@ const Icon = styled.div`
   font-size: 15px;
   color: #c4c4c4;
   transition: color 0.25s;
-  display: ${props => (props.interact ? `initial` : `none`)}
+  display: ${props => (props.interact === false ? `none` : `initial`)};
 
   :hover {
     color: #212121;
