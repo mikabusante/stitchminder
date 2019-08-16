@@ -6,7 +6,7 @@ import Collection from './Collection';
 import AddThread from './AddThread';
 import Sidebar from './Sidebar';
 
-const Dashboard = () => {
+const Dashboard = ({ loggedIn }) => {
   const [collectionData, setCollectionData] = useState([]);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Dashboard = () => {
 
   return (
     <Wrapper>
-      <Sidebar />
+      <Sidebar loggedIn={loggedIn} />
       <Content>
         <AddThread collectionData={collectionData} setCollectionData={setCollectionData} />
         <Collection collectionData={collectionData} setCollectionData={setCollectionData} />

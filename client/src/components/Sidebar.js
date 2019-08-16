@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Sidebar = () => {
+const Sidebar = ({ loggedIn }) => {
   return (
     <Wrapper>
       <Title>THREADS</Title>
       <Link href='/collection'>Your Collection</Link>
-      <Link href='/reference'>Reference</Link>
-      <Link href='/api/logout'>Logout</Link>
+      <Link href='/'>Reference</Link>
+      <Link href={loggedIn ? `/api/logout` : `/auth/google`}>
+        {loggedIn ? 'Log Out' : 'Log In'}
+      </Link>
     </Wrapper>
   );
 };

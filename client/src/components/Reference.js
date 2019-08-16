@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import uuid from 'uuid';
 import Sidebar from './Sidebar.js';
 import Item from './Item';
+import axios from 'axios';
 
 import colors from '../dmc-scraper/colors.json';
 
-const Reference = () => {
+const Reference = ({ loggedIn }) => {
   return (
     <Wrapper>
-      <Sidebar />
+      <Sidebar loggedIn={loggedIn} />
       <div>
         <Title>Reference</Title>
 
-        <Login>
+        <Login loggedIn={loggedIn}>
           Start your collection.
           <a href='/auth/google'>Log in with Google</a>
         </Login>
@@ -44,7 +45,7 @@ const Title = styled.h2`
 const Login = styled.div`
   height: min-content;
   border: 2px solid #212121;
-  display: flex;
+  display: ${props => (props.loggedIn ? `none` : `flex`)};
   align-content: center;
   justify-content: center;
   font-size: 2rem;
