@@ -30,6 +30,10 @@ const Collection = ({ setCollectionData, collectionData }) => {
 export default Collection;
 
 const Threads = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  display: grid;
+  grid-gap: 1.25rem;
+  grid-row-gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  justify-items: center;
 `;

@@ -13,10 +13,10 @@ const Reference = () => {
       <div>
         <Title>Reference</Title>
 
-        <div>
-          Start logging your collection.
+        <Login>
+          Start your collection.
           <a href='/auth/google'>Log in with Google</a>
-        </div>
+        </Login>
         <Colors>
           {colors.map(item => (
             <Item item={item} interact={false} key={uuid()} />
@@ -33,6 +33,7 @@ const Wrapper = styled.div`
   font-family: 'Karla';
   display: flex;
   margin: 8vh 6vw 8vh 3vw;
+  width: 100%;
 `;
 
 const Title = styled.h2`
@@ -40,7 +41,29 @@ const Title = styled.h2`
   text-transform: uppercase;
 `;
 
-const Colors = styled.div`
+const Login = styled.div`
+  height: min-content;
+  border: 2px solid #212121;
   display: flex;
-  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  font-size: 2rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  a {
+    color: #212121;
+    margin-left: 20px;
+    :visited {
+      color: #212121;
+    }
+  }
+`;
+
+const Colors = styled.div`
+  width: 70vw;
+  display: grid;
+  grid-gap: 1.25rem;
+  grid-row-gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  justify-items: center;
 `;

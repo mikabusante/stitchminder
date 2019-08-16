@@ -24,11 +24,12 @@ export default Item;
 
 const Wrapper = styled.div`
   border: 2px solid #212121;
-  margin: 2rem 1.25rem 1.25rem 0;
+  /* margin: 2rem 1.25rem 1.25rem 0; */
 
   display: flex;
   flex-direction: column;
-  width: 155px;
+  width: 100%;
+
   height: 210px;
 `;
 
